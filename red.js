@@ -20,13 +20,8 @@ let req = new Request(paraderos);
 const response = await req.loadJSON();
 
 const listadoParaderos = response
-	.map((item) => ({
-		stopId: item.stop_id,
-		name: item.name,
-		distance: Math.round(getDistanceFromLatLonInKm(lat, long, item.latitude, item.longitude)),
-		routes: item.routes,
-	}))
-	.filter((item) => item.distance <= 100);
+	.map((item) => ({ ...item, distance: getDistanceFromLatLonInKm(lat, long, item.lat, item.long)}))
+	.filter((item) => item.distance <= 100)
 
 // Ordenar las paradas por distancia de menor a mayor
 listadoParaderos.sort((a, b) => a.distance - b.distance);

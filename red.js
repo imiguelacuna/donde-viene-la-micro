@@ -45,5 +45,9 @@ for(let i = 0; i < listadoParaderos.length; i++) {
 
 // Ordenar las paradas por distancia de menor a mayor
 listadoParaderos.sort((a, b) => a.distance - b.distance);
+ 
+const menu = listadoParaderos.reduce((acc, curr)=> { 
+	acc[acc.stopId] = acc.name;
+}, {});
 
-return { raw: listadoParaderos };
+return { menu, raw: listadoParaderos };

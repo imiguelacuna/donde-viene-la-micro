@@ -9,7 +9,7 @@ let req = new Request(paraderos);
 
 const response = await req.loadJSON();
 
-return response;
+return response[0];
 /*
 const paradasTemp = stops
 	.map((item) => ({

@@ -23,6 +23,7 @@ paradasTemp.sort((a, b) => a.distance - b.distance);
 
 const top5 = paradasTemp.slice(0,5);
 
+return top5;
 const consultar = (stopId) => {
 	const url = baseUrl.replace('STOPID', stopId);
 }

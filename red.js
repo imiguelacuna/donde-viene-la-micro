@@ -37,15 +37,13 @@ const listadoParaderos = response
 	}))
 	.filter((item) => item.distance <= 100);
 
-/*for(let i = 0; i < listadoParaderos.length; i++) {
+for(let i = 0; i < listadoParaderos.length; i++) {
 	const paradero = listadoParaderos[i];
 	const servicios = await buscarServicios(paradero.stopId);
 	paradero.servicios = servicios;
-}*/
+}
 
 // Ordenar las paradas por distancia de menor a mayor
 listadoParaderos.sort((a, b) => a.distance - b.distance);
 
-const test = await buscarServicios("PA376");
-
-return test;
+return listadoParaderos;

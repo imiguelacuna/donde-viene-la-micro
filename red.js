@@ -26,10 +26,7 @@ const listadoParaderos = response
 		distance: Math.round(getDistanceFromLatLonInKm(lat, long, item.latitude, item.longitude)),
 		routes: item.routes,
 	}))
-	.filter((item) => item.distance <= 100)
-	.map(async (item) => {
-		return {...item, predictions: await buscarServicios(item.stopId) };
-	});
+	.filter((item) => item.distance <= 100);
 
 // Ordenar las paradas por distancia de menor a mayor
 listadoParaderos.sort((a, b) => a.distance - b.distance);

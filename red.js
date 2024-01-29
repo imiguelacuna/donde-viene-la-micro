@@ -5,25 +5,34 @@ const paraderos = 'https://raw.githubusercontent.com/imiguelacuna/donde-viene-la
 const getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) => 6371 * 2 * Math.atan2( Math.sqrt( Math.sin(deg2rad(lat2 - lat1) / 2) ** 2 + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(deg2rad(lon2 - lon1) / 2) ** 2 ), Math.sqrt( 1 - (Math.sin(deg2rad(lat2 - lat1) / 2) ** 2 + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(deg2rad(lon2 - lon1) / 2) ** 2) ) ) * 1000;
 const deg2rad = (deg) => deg * (Math.PI / 180);
 
+const buscarServicios = async (stopId) => {
+	const url = baseUrl.replace('STOPID', stopId);
+	let req = new Request(paraderos);
+	req.headers = {
+		'phone-id': 'shortcuts-apple'
+	};
+	const response = await req.loadJSON();
+	return response;
+}
+
 let req = new Request(paraderos);
 
 const response = await req.loadJSON();
 
-const paradasTemp = response
+const listadoParaderos = response
 	.map((item) => ({
 		stopId: item.stop_id,
 		name: item.name,
 		distance: Math.round(getDistanceFromLatLonInKm(lat, long, item.latitude, item.longitude)),
-		routes: item.routes
+		routes: item.routes,
 	}))
-	.filter((item) => item.distance <= 50);
+	.filter((item) => item.distance <= 50)
+	.map(async (item) => {
+		item.predictions = await buscarServicios(item.stopId);
+		return item;
+	});
 
 // Ordenar las paradas por distancia de menor a mayor
-paradasTemp.sort((a, b) => a.distance - b.distance);
+listadoParaderos.sort((a, b) => a.distance - b.distance);
 
-const top5 = paradasTemp.slice(0,5);
-
-return top5;
-const consultar = (stopId) => {
-	const url = baseUrl.replace('STOPID', stopId);
-}
+return listadoParaderos;

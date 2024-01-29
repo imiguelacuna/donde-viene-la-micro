@@ -12,14 +12,14 @@ const buscarServicios = async (stopId) => {
 		"phone-id": "123456789",
 	}
 	const response = await req.loadJSON();
-	return response.predictions.map(x => {
+	return response?.predictions?.map(x => {
 		return {
-			route: x.route,
-			distanceLabel: x.distanceLabel,
-			timeLabel: x.timeLabel,
-			distance: x.distance,
+			route: x?.route,
+			distanceLabel: x?.distanceLabel,
+			timeLabel: x?.timeLabel,
+			distance: x?.distance,
 		}
-	});
+	}) || [];
 }
 
 let req = new Request(paraderos);

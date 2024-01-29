@@ -26,7 +26,7 @@ const listadoParaderos = response
 		distance: Math.round(getDistanceFromLatLonInKm(lat, long, item.latitude, item.longitude)),
 		routes: item.routes,
 	}))
-	.filter((item) => item.distance <= 50)
+	.filter((item) => item.distance <= 100)
 	.map(async (item) => {
 		item.predictions = await buscarServicios(item.stopId);
 		return item;

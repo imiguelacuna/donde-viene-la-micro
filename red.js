@@ -24,10 +24,13 @@ const listadoParaderos = response
 		distance: Math.round(getDistanceFromLatLonInKm(lat, long, item.latitude, item.longitude)),
 		routes: item.routes,
 	}))
-	.filter((item) => item.distance <= 100)
-	.map((item) => {
-		return {...item, servicios: buscarServicios(item.stopId)}
-	});
+	.filter((item) => item.distance <= 100);
+
+for(let i = 0; i < listadoParaderos.length; i++) {
+	const paradero = listadoParaderos[i];
+	const servicios = await buscarServicios(paradero.stopId);
+	paradero.servicios = servicios;
+}
 
 // Ordenar las paradas por distancia de menor a mayor
 listadoParaderos.sort((a, b) => a.distance - b.distance);

@@ -27,8 +27,8 @@ const listadoParaderos = response
 		routes: item.routes,
 	}))
 	.filter((item) => item.distance <= 100)
-	.map(async (item) => {
-		return {...item, servicios: await buscarServicios(item.stopId)}
+	.map((item) => {
+		return {...item, servicios: buscarServicios(item.stopId)}
 	});
 
 // Ordenar las paradas por distancia de menor a mayor

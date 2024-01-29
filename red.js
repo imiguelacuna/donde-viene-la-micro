@@ -1,2 +1,2 @@
-let inputText = args.plainTexts[0];
-return inputText;
+let [lat, long] = args.plainTexts;
+return `${lat} - ${long}`;

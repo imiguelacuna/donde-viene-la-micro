@@ -16,7 +16,7 @@ const paradasTemp = response
 		distance: Math.round(getDistanceFromLatLonInKm(lat, long, item.latitude, item.longitude)),
 		routes: item.routes
 	}))
-	.filter((item) => item.distance <= 20);
+	.filter((item) => item.distance <= 50);
 
 // Ordenar las paradas por distancia de menor a mayor
 paradasTemp.sort((a, b) => a.distance - b.distance);

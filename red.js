@@ -9,16 +9,14 @@ let req = new Request(paraderos);
 
 const response = await req.loadJSON();
 
-return response[0];
-/*
-const paradasTemp = stops
+const paradasTemp = response
 	.map((item) => ({
 		stopId: item.stop_id,
 		name: item.name,
 		distance: Math.round(getDistanceFromLatLonInKm(lat, long, item.latitude, item.longitude)),
 		routes: item.routes
 	}))
-	.filter((item) => item.distance <= distancia);
+	.filter((item) => item.distance <= 20);
 
 // Ordenar las paradas por distancia de menor a mayor
 paradasTemp.sort((a, b) => a.distance - b.distance);
@@ -28,4 +26,3 @@ const top5 = paradasTemp.slice(0,5);
 const consultar = (stopId) => {
 	const url = baseUrl.replace('STOPID', stopId);
 }
-*/

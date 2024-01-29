@@ -8,9 +8,7 @@ const deg2rad = (deg) => deg * (Math.PI / 180);
 const buscarServicios = async (stopId) => {
 	const url = baseUrl.replace('STOPID', stopId);
 	let req = new Request(paraderos);
-	req.headers = {
-		'phone-id': 'shortcuts-apple'
-	};
+	req.headers.set("phone-id", "shortcuts-apple");
 	const response = await req.loadJSON();
 	return response;
 }

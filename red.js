@@ -45,4 +45,6 @@ for(let i = 0; i < listadoParaderos.length; i++) {
 // Ordenar las paradas por distancia de menor a mayor
 listadoParaderos.sort((a, b) => a.distance - b.distance);
 
-return listadoParaderos;
+const test = await buscarServicios("PA376");
+
+return { test, listadoParaderos }

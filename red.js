@@ -12,7 +12,6 @@ const buscarServicios = async (stopId) => {
 		"phone-id": "123456789",
 	}
 	const response = await req.loadJSON();
-	console.log(response);
 	return response?.predictions?.map(x => {
 		return {
 			route: x?.route,

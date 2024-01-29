@@ -7,13 +7,11 @@ const deg2rad = (deg) => deg * (Math.PI / 180);
 
 const buscarServicios = async (stopId) => {
 	const url = baseUrl.replace('STOPID', stopId);
-	let req = new Request(paraderos);
+	let req = new Request(url);
 	req.headers = {
 		"phone-id": "123456789",
 	}
 	const response = await req.loadJSON();
-	return response;
-
 	return response?.predictions?.map(x => {
 		return {
 			route: x?.route,

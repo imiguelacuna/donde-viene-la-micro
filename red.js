@@ -1,3 +1,2 @@
-let alert = new Alert();
-alert.title = "HolaMundo";
-alert.presentAlert();
+let inputText = args.plainTexts[0];
+console.log(inputText);

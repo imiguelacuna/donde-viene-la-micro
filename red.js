@@ -1,2 +1,2 @@
 let [lat, long] = args.plainTexts;
-return "asd";
+return `${lat} - ${long}`;

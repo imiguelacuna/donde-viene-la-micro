@@ -54,7 +54,7 @@ const menu = listadoParaderos.reduce((acc, curr)=> {
 
 const servicios = listadoParaderos.reduce((acc, curr) => {
 	acc[curr.stopId] = curr.servicios.reduce((acc, curr) => {
-		acc[curr.route] = [...acc[curr.route], `${curr.distanceLabel} - ${curr.timeLabel} | ${curr.licensePlate}`];
+		acc[curr.route] = [...(acc[curr.route] || []), `${curr.distanceLabel} - ${curr.timeLabel} | ${curr.licensePlate}`];
 		return acc;
 	}, {})
 	return acc;

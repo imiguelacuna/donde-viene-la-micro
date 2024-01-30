@@ -62,7 +62,7 @@ const servicios = listadoParaderos.reduce((acc, curr) => {
 
 for (let parada in servicios) {
 	for (let servicio in servicios[parada]) {
-		servicios[parada][servicio] = data.servicios[parada][servicio].join(' \n ');
+		servicios[parada][servicio] = servicios[parada][servicio].join(' \n ');
 	}
 }
 

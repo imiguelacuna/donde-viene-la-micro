@@ -19,6 +19,7 @@ const buscarServicios = async (stopId) => {
 			distanceLabel: x?.distanceLabel,
 			timeLabel: x?.timeLabel,
 			distance: x?.distance,
+			licensePlate: x?.licensePlate,
 		}
 	}) || [];
 }
@@ -51,4 +52,12 @@ const menu = listadoParaderos.reduce((acc, curr)=> {
 	return acc;
 }, {});
 
-return { menu, raw: listadoParaderos };
+const servicios = listadoParaderos.reduce((acc, curr) => {
+	acc[curr.stopId] = curr.servicios.reduce((acc, curr) => {
+		acc[curr.route] = [...acc[curr.route], `${curr.distanceLabel} - ${curr.timeLabel} | ${curr.licensePlate}`];
+		return acc;
+	}, {})
+	return acc;
+}, {});
+
+return { menu, servicios };

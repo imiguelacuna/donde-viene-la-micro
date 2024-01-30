@@ -48,7 +48,7 @@ for(let i = 0; i < listadoParaderos.length; i++) {
 listadoParaderos.sort((a, b) => a.distance - b.distance);
  
 const menu = listadoParaderos.reduce((acc, curr)=> { 
-	acc[curr.stopId] = `${curr.distance} mts. - {curr.name}`;
+	acc[curr.stopId] = `${curr.distance} metros - ${curr.name}`;
 	return acc;
 }, {});
 

@@ -53,17 +53,15 @@ const menu = listadoParaderos.reduce((acc, curr)=> {
 }, {});
 
 const servicios = listadoParaderos.reduce((acc, curr) => {
-	acc[curr.stopId] = curr.servicios.reduce((acc, curr) => {
-		acc[curr.route] = [...(acc[curr.route] || []), `${curr.distanceLabel} - ${curr.timeLabel} - ${curr.licensePlate}`];
-		return acc;
+	acc[curr.stopId] = curr.servicios.reduce((accServicio, currServicio) => {
+		const info = `${currServicio.distanceLabel} - ${currServicio.timeLabel} - ${currServicio.licensePlate}`;
+		accServicio[currServicio.route] = accServicio[currServicio.route]
+			? accServicio[currServicio.route] + '\n' + info
+			: info;
+		return accServicio;
 	}, {});
+
 	return acc;
 }, {});
-
-for (let parada in servicios) {
-	for (let servicio in servicios[parada]) {
-		servicios[parada][servicio] = servicios[parada][servicio].join(' \n ');
-	}
-}
 
 return { menu, servicios };

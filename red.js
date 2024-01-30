@@ -54,10 +54,13 @@ let listadoParaderos = response
 	}))
 	.filter((item) => item.distance <= 100);
 
-for(let i = 0; i < listadoParaderos.length; i++) {
-	const paradero = listadoParaderos[i];
-	paradero.servicios = await getServices(paradero.stopId);
-}
+const servicesPromises = listadoParaderos.map(paradero => getServices(paradero.stopId));
+const allServices = await Promise.all(servicesPromises);
+
+listadoParaderos = listadoParaderos.map((paradero, index) => {
+	paradero.servicios = allServices[index];
+	return paradero;
+});
 
 listadoParaderos = sortStops(listadoParaderos);
 
